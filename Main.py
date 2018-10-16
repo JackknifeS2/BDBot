@@ -38,6 +38,11 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    if message.content.startswith('!join'):
+        role = discord.utils.get(message.author.server.roles, name="pythoBOT")
+        await client.add_roles(message.author, role)
+        await client.send_message(message.channel, f'{message.author.mention} 君もPythonBOTのフレンズなんだね！')
+
     message_str = str(message.content)
     find_message = re.search('!\w{2,3}', message_str)
 
